@@ -12,7 +12,7 @@ services:
   php-service:
     build:
       context: ..
-      dockerfile: ../application/Dockerfile
+      dockerfile: ./application/Dockerfile
     container_name: php-container
     ports:
       - "${FPM_EXTERNAL_PORT}:${FPM_PORT}"
