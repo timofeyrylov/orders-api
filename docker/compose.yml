@@ -5,19 +5,19 @@ services:
     ports:
       - "${NGINX_EXTERNAL_PORT}:${NGINX_PORT}"
     volumes:
-      - ./application:/var/www/orders-api
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ../application:/var/www/orders-api
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php-service
   php-service:
     build:
       context: .
-      dockerfile: ./application/Dockerfile
+      dockerfile: ../application/Dockerfile
     container_name: php-container
     ports:
       - "${FPM_EXTERNAL_PORT}:${FPM_PORT}"
     volumes:
-      - ./application:/var/www/orders-api
+      - ../application:/var/www/orders-api
     depends_on:
       - mysql-service
     environment:
@@ -33,9 +33,9 @@ services:
     ports:
       - '${MYSQL_EXTERNAL_PORT}:${MYSQL_PORT}'
     volumes:
-      - ./docker/mysql:/var/lib/mysql
-      - ./migrations/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./migrations/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      - ./mysql:/var/lib/mysql
+      - ../migrations/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ../migrations/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
     environment:
       - MYSQL_ROOT_PASSWORD
       - MYSQL_PASSWORD

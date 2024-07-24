@@ -9,7 +9,7 @@
 **/.DS_Store
 **/.git/
 **/.gitattributes
-**/.gitignore
+../.idea/.gitignore
 **/.gitmodules
 **/compose.*.yaml
 **/compose.*.yml
@@ -31,4 +31,5 @@ application/vendor/
 .env.local
 .env.local.php
 .env.test
+.env.example
 application/composer.lock

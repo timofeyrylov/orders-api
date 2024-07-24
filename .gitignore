@@ -33,3 +33,8 @@ tests/_support/_generated
 /.vagrant
 
 /docker/mysql/
+/docker/.env
+/docker/.env.*.local
+/docker/.env.local
+/docker/.env.local.php
+/docker/.env.test
