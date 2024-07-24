@@ -4,7 +4,7 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
-use app\modules\OrderListing\Module;
+use OrderListing\Module;
 use yii\helpers\Url;
 
 AppAsset::register($this);

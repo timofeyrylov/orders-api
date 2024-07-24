@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\OrderListing;
+namespace OrderListing;
 
 use Yii;
 use yii\base\Module as BaseModule;
 
 class Module extends BaseModule
 {
-    public $layout = '@app/modules/OrderListing/views/layouts/main.php';
+    public $layout = '@OrderListing/views/layouts/main.php';
 
     /**
      * Инициализация модуля

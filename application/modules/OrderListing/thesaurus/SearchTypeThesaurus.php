@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\OrderListing\thesaurus;
+namespace OrderListing\thesaurus;
 
-use app\modules\OrderListing\interfaces\SearchQueryInterface;
+use OrderListing\interfaces\SearchQueryInterface;
 
 enum SearchTypeThesaurus: string
 {

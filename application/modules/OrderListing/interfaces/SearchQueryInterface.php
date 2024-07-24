@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\OrderListing\interfaces;
+namespace OrderListing\interfaces;
 
 use yii\db\ActiveQueryInterface;
 

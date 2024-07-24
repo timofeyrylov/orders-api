@@ -1,14 +1,14 @@
 <?php
 
-namespace app\modules\OrderListing\controllers;
+namespace OrderListing\controllers;
 
-use app\modules\OrderListing\models\Order;
-use app\modules\OrderListing\models\Service;
-use app\modules\OrderListing\Module;
-use app\modules\OrderListing\thesaurus\ColumnThesaurus;
-use app\modules\OrderListing\thesaurus\ModeThesaurus;
-use app\modules\OrderListing\thesaurus\SearchTypeThesaurus;
-use app\modules\OrderListing\thesaurus\StatusThesaurus;
+use OrderListing\models\Order;
+use OrderListing\models\Service;
+use OrderListing\Module;
+use OrderListing\thesaurus\ColumnThesaurus;
+use OrderListing\thesaurus\ModeThesaurus;
+use OrderListing\thesaurus\SearchTypeThesaurus;
+use OrderListing\thesaurus\StatusThesaurus;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

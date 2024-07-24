@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\OrderListing\models;
+namespace OrderListing\models;
 
-use app\modules\OrderListing\interfaces\SearchQueryInterface;
+use OrderListing\interfaces\SearchQueryInterface;
 use yii\db\ActiveQuery;
 use yii\db\Query;
 

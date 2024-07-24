@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\OrderListing\thesaurus;
+namespace OrderListing\thesaurus;
 
 enum StatusThesaurus: string
 {

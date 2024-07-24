@@ -1,9 +1,9 @@
 <?php
 
-use app\modules\OrderListing\Module;
-use app\modules\OrderListing\thesaurus\ModeThesaurus;
-use app\modules\OrderListing\thesaurus\SearchTypeThesaurus;
-use app\modules\OrderListing\thesaurus\StatusThesaurus;
+use OrderListing\Module;
+use OrderListing\thesaurus\ModeThesaurus;
+use OrderListing\thesaurus\SearchTypeThesaurus;
+use OrderListing\thesaurus\StatusThesaurus;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;

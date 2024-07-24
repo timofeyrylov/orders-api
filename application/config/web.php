@@ -11,6 +11,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@OrderListing' => '@app/modules/OrderListing'
     ],
     'components' => [
         'request' => [
@@ -57,10 +58,7 @@ $config = [
     'params' => $params,
     'modules' => [
         'order-listing' => [
-            'class' => 'app\modules\OrderListing\Module'
-        ],
-        'gridview' =>  [
-            'class' => '\kartik\grid\Module'
+            'class' => 'OrderListing\Module'
         ]
     ]
 ];
