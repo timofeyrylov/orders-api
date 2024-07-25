@@ -46,7 +46,7 @@ class ServiceQuery extends ActiveQuery implements SearchQueryInterface
     {
         return $this->joinWith('orders', false)
             ->leftJoin('users', 'users.id = orders.user_id')
-            ->andFilterWhere(['like', 'upper(concat(users.first_name, "", users.last_name))', mb_strtoupper(trim($userName))]);
+            ->andFilterWhere(['like', 'upper(concat(users.first_name, " ", users.last_name))', mb_strtoupper(trim($userName))]);
     }
 
     /**

@@ -27,7 +27,6 @@ class OrderController extends Controller
      */
     public function actionGet(?string $status = '', string $searchType = '', int|string|null $searchValue = null, string $mode = '', ?int $serviceId = null): string
     {
-        $this->setSession($status, $searchType, $searchValue, $mode, $serviceId);
         $orderDataProvider = $this->getOrders($status, $searchType, $searchValue, $mode, $serviceId);
         $serviceDataProvider = $this->getServices($status, $searchType, $searchValue, $mode);
         return $this->render('listing', [
@@ -64,28 +63,6 @@ class OrderController extends Controller
         fclose($output);
         ob_end_flush();
         die();
-    }
-
-    /**
-     * Инициализация пользовательской сессии
-     * @param string|null $status - Статус заказа
-     * @param string $searchType - Тип поиска
-     * @param int|string|null $searchValue - Поисковый запрос
-     * @param string $mode - Режим заказа
-     * @param int|null $serviceId - Id сервиса
-     * @return void
-     */
-    private function setSession(?string $status = '', string $searchType = '', int|string|null $searchValue = null, string $mode = '', ?int $serviceId = null): void
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $_SESSION['SELECTED_FILTERS']['STATUS'] = $status;
-        $_SESSION['SELECTED_FILTERS']['MODE'] = $mode;
-        $_SESSION['SELECTED_FILTERS']['SERVICE'] = $serviceId;
-        $_SESSION['SEARCH']['TYPE'] = $searchType;
-        $_SESSION['SEARCH']['VALUE'] = $searchValue;
-        session_write_close();
     }
 
     /**

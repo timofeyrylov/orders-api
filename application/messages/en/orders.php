@@ -1,6 +1,7 @@
 <?php
 
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
+use OrderListing\thesaurus\codes\SearchThesaurus as OrdersSearch;
 use OrderListing\thesaurus\codes\TabThesaurus as OrdersTab;
 
 return [
@@ -18,4 +19,5 @@ return [
     OrdersColumn::Status->value => 'Status',
     OrdersColumn::Mode->value => 'Mode',
     OrdersColumn::Created->value => 'Created',
+    OrdersSearch::Placeholder->value => 'Search orders'
 ];

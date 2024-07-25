@@ -1,6 +1,7 @@
 <?php
 
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
+use OrderListing\thesaurus\codes\SearchThesaurus as OrdersSearch;
 use OrderListing\thesaurus\codes\TabThesaurus as OrdersTab;
 
 return [
@@ -18,4 +19,5 @@ return [
     OrdersColumn::Status->value => 'Статус',
     OrdersColumn::Mode->value => 'Режим',
     OrdersColumn::Created->value => 'Дата создания',
+    OrdersSearch::Placeholder->value => 'Искать заказы'
 ];
