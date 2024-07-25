@@ -4,11 +4,11 @@ namespace OrderListing\controllers;
 
 use OrderListing\models\Order;
 use OrderListing\models\Service;
-use OrderListing\Module;
 use OrderListing\thesaurus\ColumnThesaurus;
 use OrderListing\thesaurus\ModeThesaurus;
 use OrderListing\thesaurus\SearchTypeThesaurus;
 use OrderListing\thesaurus\StatusThesaurus;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -55,7 +55,7 @@ class OrderController extends Controller
             ->findByService($serviceId)
             ->orderBy(['id' => SORT_DESC]);
         foreach (ColumnThesaurus::cases() as $column) {
-            echo Module::translate('listing', $column->name) . ';';
+            echo Yii::t('listing', $column->name) . ';';
         }
         echo "\r\n";
         foreach ($orderQuery->each() as $model) {

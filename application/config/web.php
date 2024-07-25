@@ -36,6 +36,17 @@ $config = [
                 ],
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'fileMap'  => [
+                        'listing' => 'listing.php',
+                    ]
+                ]
+            ]
+        ],
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,

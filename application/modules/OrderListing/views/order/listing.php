@@ -1,6 +1,5 @@
 <?php
 
-use OrderListing\Module;
 use OrderListing\thesaurus\ModeThesaurus;
 use OrderListing\thesaurus\SearchTypeThesaurus;
 use OrderListing\thesaurus\StatusThesaurus;
@@ -9,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
-$this->title = Module::translate('listing', 'Orders');
+$this->title = Yii::t('listing', 'Orders');
 ?>
 <?php
 /** @var ActiveDataProvider $orderDataProvider */
@@ -20,19 +19,19 @@ $this->title = Module::translate('listing', 'Orders');
         <li><?php foreach (StatusThesaurus::cases() as $status): ?></li>
         <li <?php if ($_SESSION['SELECTED_FILTERS']['STATUS'] === $status->value): ?>class="active"<?php endif; ?>>
             <a href="<?= Url::toRoute(["/" . Yii::$app->language . "/orders/$status->value"]) ?>">
-                <?= Module::translate('listing', $status->getLabel()) ?>
+                <?= Yii::t('listing', $status->getLabel()) ?>
             </a>
         </li>
         <?php endforeach; ?>
         <li class="pull-right custom-search">
             <form class="form-inline" action="<?= Url::current() ?>" method="get">
                 <div class="input-group">
-                    <input type="text" name="searchValue" class="form-control" value=" <?= Html::encode($_SESSION['SEARCH']['VALUE']) ?>" placeholder="<?= Module::translate('listing', 'Search orders') ?>">
+                    <input type="text" name="searchValue" class="form-control" value=" <?= Html::encode($_SESSION['SEARCH']['VALUE']) ?>" placeholder="<?= Yii::t('listing', 'Search orders') ?>">
                     <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="searchType">
               <?php foreach (SearchTypeThesaurus::cases() as $searchType): ?>
-                  <option value="<?= $searchType->value ?>" <?php if ($_SESSION['SEARCH']['TYPE'] === $searchType->value): ?>selected=""<?php endif; ?>><?= Module::translate('listing', $searchType->getLabel()) ?></option>
+                  <option value="<?= $searchType->value ?>" <?php if ($_SESSION['SEARCH']['TYPE'] === $searchType->value): ?>selected=""<?php endif; ?>><?= Yii::t('listing', $searchType->getLabel()) ?></option>
               <?php endforeach; ?>
             </select>
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -44,14 +43,14 @@ $this->title = Module::translate('listing', 'Orders');
     <table class="table order-table">
         <thead>
         <tr>
-            <th><?= Module::translate('listing', 'ID') ?></th>
-            <th><?= Module::translate('listing', 'User') ?></th>
-            <th><?= Module::translate('listing', 'Link') ?></th>
-            <th><?= Module::translate('listing', 'Quantity') ?></th>
+            <th><?= Yii::t('listing', 'ID') ?></th>
+            <th><?= Yii::t('listing', 'User') ?></th>
+            <th><?= Yii::t('listing', 'Link') ?></th>
+            <th><?= Yii::t('listing', 'Quantity') ?></th>
             <th class="dropdown-th">
                 <div class="dropdown">
                     <button class="btn btn-th btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <?= Module::translate('listing', 'Service') ?>
+                        <?= Yii::t('listing', 'Service') ?>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li>
@@ -74,11 +73,11 @@ $this->title = Module::translate('listing', 'Orders');
                     </ul>
                 </div>
             </th>
-            <th><?= Module::translate('listing', 'Status') ?></th>
+            <th><?= Yii::t('listing', 'Status') ?></th>
             <th class="dropdown-th">
                 <div class="dropdown">
                     <button class="btn btn-th btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <?= Module::translate('listing', 'Mode') ?>
+                        <?= Yii::t('listing', 'Mode') ?>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <?php foreach (ModeThesaurus::cases() as $mode): ?>
@@ -91,7 +90,7 @@ $this->title = Module::translate('listing', 'Orders');
                     </ul>
                 </div>
             </th>
-            <th><?= Module::translate('listing', 'Created') ?></th>
+            <th><?= Yii::t('listing', 'Created') ?></th>
         </tr>
         </thead>
         <tbody>
@@ -116,9 +115,9 @@ $this->title = Module::translate('listing', 'Orders');
         </div>
         <div class="col-sm-4 pagination-counters">
             <?= $orderDataProvider->getPagination()->getOffset() + 1 ?>
-            <?= Module::translate('listing', 'to') ?>
+            <?= Yii::t('listing', 'to') ?>
             <?= $orderDataProvider->getPagination()->getOffset() + $orderDataProvider->getPagination()->getLimit() ?>
-            <?= Module::translate('listing', 'of') ?>
+            <?= Yii::t('listing', 'of') ?>
             <?= $orderDataProvider->totalCount ?>
         </div>
     </div>
@@ -129,7 +128,7 @@ $this->title = Module::translate('listing', 'Orders');
             'searchType' => $_SESSION['SEARCH']['TYPE'],
             'searchValue' => $_SESSION['SEARCH']['VALUE'],
             'mode' => $_SESSION['SELECTED_FILTERS']['MODE']
-        ]) ?>"><?= Module::translate('listing', 'Save result') ?></a>
+        ]) ?>"><?= Yii::t('listing', 'Save result') ?></a>
     </button>
 </div>
 
