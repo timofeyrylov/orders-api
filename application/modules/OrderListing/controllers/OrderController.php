@@ -48,26 +48,21 @@ class OrderController extends Controller
      */
     public function actionExport(?string $status = '', string $searchType = '', int|string|null $searchValue = null, string $mode = '', ?int $serviceId = null)
     {
-        header('Content-type: text/csv');
-        header('Content-Disposition: attachment; filename="orders_' . date('d.m.Y') . '.csv"');
         $orderQuery = SearchTypeThesaurus::getQuery(Order::find(), $searchType, $searchValue)->findByStatus(StatusThesaurus::getStatusId($status))
             ->findByMode(ModeThesaurus::getModeId($mode))
             ->findByService($serviceId)
             ->orderBy(['id' => SORT_DESC]);
-        foreach (OrdersColumn::cases() as $column) {
-            echo Yii::t('orders', $column->value) . ';';
-        }
-        echo "\r\n";
+        ob_start();
+        header('Content-type: text/csv');
+        header('Content-Disposition: attachment; filename="orders_' . date('d.m.Y') . '.csv"');
+        $output = fopen('php://output', 'w');
+        $columns = array_map(fn(OrdersColumn $column): string => Yii::t('orders', $column->value), OrdersColumn::cases());
+        fputcsv($output, $columns);
         foreach ($orderQuery->each() as $model) {
-            echo $model->id . ';'.
-                $model->userName . ';' .
-                $model->link . ';' .
-                $model->quantity . ';' .
-                $model->serviceName . ';' .
-                Yii::t('orders', StatusThesaurus::getStatusName($model->status)) . ';' .
-                ModeThesaurus::getModeName($model->mode) . ';' .
-                date('Y-m-d H:i:s', $model->created_at) . ";\r\n";
+            fputcsv($output, $model->toArray());
         }
+        fclose($output);
+        ob_end_flush();
         die();
     }
 

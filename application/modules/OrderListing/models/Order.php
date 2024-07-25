@@ -2,6 +2,8 @@
 
 namespace OrderListing\models;
 
+use OrderListing\thesaurus\ModeThesaurus;
+use OrderListing\thesaurus\StatusThesaurus;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
@@ -35,6 +37,23 @@ class Order extends ActiveRecord
     public function getService(): ActiveQuery
     {
         return $this->hasOne(Service::class, ['id' => 'service_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function fields(): array
+    {
+        return [
+            'id',
+            'userName',
+            'link',
+            'quantity',
+            'serviceName',
+            'status' => fn(): string => Yii::t('orders', StatusThesaurus::getStatusName($this->status)),
+            'mode' => fn(): string => ModeThesaurus::getModeName($this->mode),
+            'created_at' => fn(): string => date('Y-m-d H:i:s', $this->created_at)
+        ];
     }
 
     /**
