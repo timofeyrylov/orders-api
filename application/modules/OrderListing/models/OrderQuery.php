@@ -55,7 +55,7 @@ class OrderQuery extends ActiveQuery implements SearchQueryInterface
      */
     public function findByUserName(?string $userName = null): OrderQuery
     {
-        return $this->andFilterWhere(['like', 'upper(concat(u.first_name, "", u.last_name))', mb_strtoupper(trim($userName))]);
+        return $this->andFilterWhere(['like', 'upper(concat(u.first_name, " ", u.last_name))', mb_strtoupper(trim($userName))]);
     }
 
     /**

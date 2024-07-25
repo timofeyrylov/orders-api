@@ -30,7 +30,7 @@ $this->title = Yii::t('application', ApplicationTab::Orders->value);
         <li class="pull-right custom-search">
             <form class="form-inline" action="<?= Url::current() ?>" method="get">
                 <div class="input-group">
-                    <input type="text" name="searchValue" class="form-control" value=" <?= Html::encode($_SESSION['SEARCH']['VALUE']) ?>" placeholder="<?= Yii::t('listing', 'Search orders') ?>">
+                    <input type="text" name="searchValue" class="form-control" value="<?= Html::encode($_SESSION['SEARCH']['VALUE']) ?>" placeholder="<?= Yii::t('listing', 'Search orders') ?>">
                     <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="searchType">
