@@ -3,6 +3,7 @@
 namespace OrderListing\thesaurus;
 
 use OrderListing\interfaces\SearchQueryInterface;
+use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 
 enum SearchTypeThesaurus: string
 {
@@ -19,9 +20,9 @@ enum SearchTypeThesaurus: string
     public function getLabel(): string
     {
         return match ($this) {
-            self::OrderId => 'Order ID',
-            self::Link => 'Link',
-            self::UserName => 'Username'
+            self::OrderId => OrdersColumn::ID->value,
+            self::Link => OrdersColumn::Link->value,
+            self::UserName => OrdersColumn::User->value
         };
     }
 

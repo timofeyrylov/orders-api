@@ -42,7 +42,8 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@app/messages',
                     'fileMap'  => [
-                        'listing' => 'listing.php',
+                        'application' => 'application.php',
+                        'orders' => 'orders.php',
                     ]
                 ]
             ]

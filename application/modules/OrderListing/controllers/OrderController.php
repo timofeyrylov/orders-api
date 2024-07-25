@@ -4,7 +4,7 @@ namespace OrderListing\controllers;
 
 use OrderListing\models\Order;
 use OrderListing\models\Service;
-use OrderListing\thesaurus\ColumnThesaurus;
+use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use OrderListing\thesaurus\ModeThesaurus;
 use OrderListing\thesaurus\SearchTypeThesaurus;
 use OrderListing\thesaurus\StatusThesaurus;
@@ -54,8 +54,8 @@ class OrderController extends Controller
             ->findByMode(ModeThesaurus::getModeId($mode))
             ->findByService($serviceId)
             ->orderBy(['id' => SORT_DESC]);
-        foreach (ColumnThesaurus::cases() as $column) {
-            echo Yii::t('listing', $column->name) . ';';
+        foreach (OrdersColumn::cases() as $column) {
+            echo Yii::t('orders', $column->value) . ';';
         }
         echo "\r\n";
         foreach ($orderQuery->each() as $model) {
@@ -64,7 +64,7 @@ class OrderController extends Controller
                 $model->link . ';' .
                 $model->quantity . ';' .
                 $model->serviceName . ';' .
-                StatusThesaurus::getStatusName($model->status) . ';' .
+                Yii::t('orders', StatusThesaurus::getStatusName($model->status)) . ';' .
                 ModeThesaurus::getModeName($model->mode) . ';' .
                 date('Y-m-d H:i:s', $model->created_at) . ";\r\n";
         }

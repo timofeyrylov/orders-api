@@ -1,5 +1,9 @@
 <?php
 
+use app\thesaurus\codes\ExportThesaurus as ApplicationExport;
+use app\thesaurus\codes\PaginationThesaurus as ApplicationPagination;
+use app\thesaurus\codes\TabThesaurus as ApplicationTab;
+use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use OrderListing\thesaurus\ModeThesaurus;
 use OrderListing\thesaurus\SearchTypeThesaurus;
 use OrderListing\thesaurus\StatusThesaurus;
@@ -8,7 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
-$this->title = Yii::t('listing', 'Orders');
+$this->title = Yii::t('application', ApplicationTab::Orders->value);
 ?>
 <?php
 /** @var ActiveDataProvider $orderDataProvider */
@@ -19,7 +23,7 @@ $this->title = Yii::t('listing', 'Orders');
         <li><?php foreach (StatusThesaurus::cases() as $status): ?></li>
         <li <?php if ($_SESSION['SELECTED_FILTERS']['STATUS'] === $status->value): ?>class="active"<?php endif; ?>>
             <a href="<?= Url::toRoute(["/" . Yii::$app->language . "/orders/$status->value"]) ?>">
-                <?= Yii::t('listing', $status->getLabel()) ?>
+                <?= Yii::t('orders', $status->getLabel()) ?>
             </a>
         </li>
         <?php endforeach; ?>
@@ -31,7 +35,7 @@ $this->title = Yii::t('listing', 'Orders');
 
             <select class="form-control search-select" name="searchType">
               <?php foreach (SearchTypeThesaurus::cases() as $searchType): ?>
-                  <option value="<?= $searchType->value ?>" <?php if ($_SESSION['SEARCH']['TYPE'] === $searchType->value): ?>selected=""<?php endif; ?>><?= Yii::t('listing', $searchType->getLabel()) ?></option>
+                  <option value="<?= $searchType->value ?>" <?php if ($_SESSION['SEARCH']['TYPE'] === $searchType->value): ?>selected=""<?php endif; ?>><?= Yii::t('orders', $searchType->getLabel()) ?></option>
               <?php endforeach; ?>
             </select>
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
@@ -43,14 +47,14 @@ $this->title = Yii::t('listing', 'Orders');
     <table class="table order-table">
         <thead>
         <tr>
-            <th><?= Yii::t('listing', 'ID') ?></th>
-            <th><?= Yii::t('listing', 'User') ?></th>
-            <th><?= Yii::t('listing', 'Link') ?></th>
-            <th><?= Yii::t('listing', 'Quantity') ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::ID->value) ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::User->value) ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::Link->value) ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::Quantity->value) ?></th>
             <th class="dropdown-th">
                 <div class="dropdown">
                     <button class="btn btn-th btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <?= Yii::t('listing', 'Service') ?>
+                        <?= Yii::t('orders', OrdersColumn::Service->value) ?>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li>
@@ -73,11 +77,11 @@ $this->title = Yii::t('listing', 'Orders');
                     </ul>
                 </div>
             </th>
-            <th><?= Yii::t('listing', 'Status') ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::Status->value) ?></th>
             <th class="dropdown-th">
                 <div class="dropdown">
                     <button class="btn btn-th btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <?= Yii::t('listing', 'Mode') ?>
+                        <?= Yii::t('orders', OrdersColumn::Mode->value) ?>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <?php foreach (ModeThesaurus::cases() as $mode): ?>
@@ -90,7 +94,7 @@ $this->title = Yii::t('listing', 'Orders');
                     </ul>
                 </div>
             </th>
-            <th><?= Yii::t('listing', 'Created') ?></th>
+            <th><?= Yii::t('orders', OrdersColumn::Created->value) ?></th>
         </tr>
         </thead>
         <tbody>
@@ -101,7 +105,7 @@ $this->title = Yii::t('listing', 'Orders');
                 <td class="link"><?= Html::encode($model->link) ?></td>
                 <td><?= $model->quantity ?></td>
                 <td><?= Html::encode($model->serviceName) ?></td>
-                <td><?= Html::encode(StatusThesaurus::getStatusName($model->status)) ?></td>
+                <td><?= Html::encode(Yii::t('orders', StatusThesaurus::getStatusName($model->status))) ?></td>
                 <td><?= Html::encode(ModeThesaurus::getModeName($model->mode)) ?></td>
                 <?php [$createDate, $createTime] = explode(' ', date('Y-m-d H:i:s', $model->created_at)) ?>
                 <td><span class="nowrap"><?= $createDate ?></span><span class="nowrap"><?= $createTime ?></span></td>
@@ -115,9 +119,9 @@ $this->title = Yii::t('listing', 'Orders');
         </div>
         <div class="col-sm-4 pagination-counters">
             <?= $orderDataProvider->getPagination()->getOffset() + 1 ?>
-            <?= Yii::t('listing', 'to') ?>
+            <?= Yii::t('application', ApplicationPagination::To->value) ?>
             <?= $orderDataProvider->getPagination()->getOffset() + $orderDataProvider->getPagination()->getLimit() ?>
-            <?= Yii::t('listing', 'of') ?>
+            <?= Yii::t('application', ApplicationPagination::From->value) ?>
             <?= $orderDataProvider->totalCount ?>
         </div>
     </div>
@@ -128,7 +132,7 @@ $this->title = Yii::t('listing', 'Orders');
             'searchType' => $_SESSION['SEARCH']['TYPE'],
             'searchValue' => $_SESSION['SEARCH']['VALUE'],
             'mode' => $_SESSION['SELECTED_FILTERS']['MODE']
-        ]) ?>"><?= Yii::t('listing', 'Save result') ?></a>
+        ]) ?>"><?= Yii::t('application', ApplicationExport::Save->value) ?></a>
     </button>
 </div>
 
