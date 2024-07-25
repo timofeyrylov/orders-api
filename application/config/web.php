@@ -55,12 +55,12 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 [
-                    'pattern' => '<language:\w+>/orders/<status:pending|inprogress|completed|canceled|error>',
+                    'pattern' => '/<status:pending|inprogress|completed|canceled|error>',
                     'route' => 'order-listing/order/get',
                     'defaults' => ['status' => '', 'language' => 'en'],
                 ],
                 [
-                    'pattern' => '<language:\w+>/orders/export/<status:pending|inprogress|completed|canceled|error>',
+                    'pattern' => '/export/<status:pending|inprogress|completed|canceled|error>',
                     'route' => 'order-listing/order/export',
                     'defaults' => ['status' => '', 'language' => 'en'],
                 ]

@@ -22,7 +22,7 @@ $this->title = Yii::t('application', ApplicationTab::Orders->value);
     <ul class="nav nav-tabs p-b">
         <li><?php foreach (StatusThesaurus::cases() as $status): ?></li>
         <li <?php if ($_SESSION['SELECTED_FILTERS']['STATUS'] === $status->value): ?>class="active"<?php endif; ?>>
-            <a href="<?= Url::toRoute(["/" . Yii::$app->language . "/orders/$status->value"]) ?>">
+            <a href="<?= Url::toRoute(["/$status->value"]) ?>">
                 <?= Yii::t('orders', $status->getLabel()) ?>
             </a>
         </li>
@@ -127,7 +127,7 @@ $this->title = Yii::t('application', ApplicationTab::Orders->value);
     </div>
     <button class="btn btn-th btn-default" type="button">
         <a href="<?= Url::toRoute([
-            "/" . Yii::$app->language . "/orders/export/" . $_SESSION['SELECTED_FILTERS']['STATUS'],
+            "/export/" . $_SESSION['SELECTED_FILTERS']['STATUS'],
             'serviceId' => $_SESSION['SELECTED_FILTERS']['SERVICE'],
             'searchType' => $_SESSION['SEARCH']['TYPE'],
             'searchValue' => $_SESSION['SEARCH']['VALUE'],
