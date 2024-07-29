@@ -12,6 +12,8 @@ use yii\data\Pagination;
 
 class ListingAction extends Action
 {
+    const int ORDERS_PER_PAGE = 100;
+
     /**
      * Получение списка заказов и сервисов
      * @return string
@@ -26,7 +28,7 @@ class ListingAction extends Action
         $servicesQuery = $searchService->search();
         $pagination = new Pagination([
             'totalCount' => $ordersQuery->count(),
-            'pageSize' => 100,
+            'pageSize' => self::ORDERS_PER_PAGE,
             'forcePageParam' => false,
             'pageSizeParam' => false
         ]);
