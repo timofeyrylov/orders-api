@@ -56,13 +56,13 @@ $config = [
             'rules' => [
                 [
                     'pattern' => '/<status:pending|inprogress|completed|canceled|error>',
-                    'route' => 'order-listing/order/get',
-                    'defaults' => ['status' => '', 'language' => 'en'],
+                    'route' => 'order-listing/order/listing',
+                    'defaults' => ['status' => ''],
                 ],
                 [
                     'pattern' => '/export/<status:pending|inprogress|completed|canceled|error>',
                     'route' => 'order-listing/order/export',
-                    'defaults' => ['status' => '', 'language' => 'en'],
+                    'defaults' => ['status' => ''],
                 ]
             ]
         ]
@@ -84,6 +84,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        'allowedIPs' => ['127.0.0.1', '::1', '192.168.65.1']
     ];
 }
 

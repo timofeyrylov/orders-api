@@ -1,16 +1,16 @@
 <?php
 
+use OrderListing\models\Order;
 use OrderListing\thesaurus\ModeThesaurus;
 use OrderListing\thesaurus\StatusThesaurus;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 
-/** @var ActiveDataProvider $orderDataProvider */
+/** @var array<Order> $orders */
 
 ?>
 
 <tbody>
-<?php foreach ($orderDataProvider->getModels() as $model): ?>
+<?php foreach ($orders as $model): ?>
     <tr>
         <td><?= $model->id ?></td>
         <td><?= Html::encode($model->userName) ?></td>

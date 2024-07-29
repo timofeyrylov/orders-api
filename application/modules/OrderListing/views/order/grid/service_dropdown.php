@@ -1,10 +1,11 @@
 <?php
 
+use OrderListing\models\Service;
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
-/** @var ActiveDataProvider $serviceDataProvider */
+/** @var array<Service> $services */
+/** @var int $totalCount */
 
 ?>
 
@@ -15,10 +16,10 @@ use yii\helpers\Url;
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <li>
             <a href="<?= Url::current(['serviceId' => null]) ?>">
-                All (<?= $serviceDataProvider->totalCount ?>)
+                All (<?= $totalCount ?>)
             </a>
         </li>
-        <?php foreach ($serviceDataProvider->getModels() as $model): ?>
+        <?php foreach ($services as $model): ?>
             <li
                 <?php if (Yii::$app->request->get('serviceId') === $model->id): ?>
                     class="active"

@@ -1,7 +1,7 @@
 <?php
 
-use OrderListing\components\SearchBar;
 use OrderListing\thesaurus\StatusThesaurus;
+use OrderListing\widgets\SearchBar;
 use yii\helpers\Url;
 
 ?>

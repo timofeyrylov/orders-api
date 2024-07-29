@@ -1,6 +1,6 @@
 <?php
 
-namespace OrderListing\components;
+namespace OrderListing\widgets;
 
 use yii\base\Widget;
 use yii\data\Pagination as DataPagination;

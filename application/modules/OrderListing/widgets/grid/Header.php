@@ -1,6 +1,6 @@
 <?php
 
-namespace OrderListing\components\grid;
+namespace OrderListing\widgets\grid;
 
 use yii\base\Widget;
 
