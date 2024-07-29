@@ -7,6 +7,12 @@ use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use yii\db\Query;
 
+/**
+ * This is the model class for table "services".
+ *
+ * @property int $id
+ * @property string $name
+ */
 class Service extends ActiveRecord
 {
     /**
@@ -28,7 +34,18 @@ class Service extends ActiveRecord
      */
     public static function tableName(): string
     {
-        return '{{services}}';
+        return 'services';
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 300],
+        ];
     }
 
     /**
