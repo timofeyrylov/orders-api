@@ -82,7 +82,7 @@ class OrderSearch extends BaseSearch
     public function applyFilterByUserName(?string $userName): self
     {
         if (isset($userName)) {
-            $this->joinWith('user', 'u')->getQuery()
+            $this->getQuery()
                 ->andFilterWhere(['like', 'upper(concat(u.first_name, " ", u.last_name))', mb_strtoupper(trim($userName))]);
         }
         return $this;
@@ -137,23 +137,37 @@ class OrderSearch extends BaseSearch
     /**
      * Получение результата поискового запроса
      * @param Pagination|null $pagination - Пагинация
-     * @return array<>|BatchQueryResult
+     * @return array<>
      */
-    public function search(?Pagination $pagination = null, bool $batch = false): array|BatchQueryResult
+    public function search(?Pagination $pagination = null): array
     {
         if ($pagination) {
             $this->getQuery()->offset($pagination->getOffset())
                 ->limit($pagination->getLimit());
         }
 
-        $this->joinWith('user', 'u')
-            ->joinWith('service', 's')
-            ->getQuery()
-            ->select(['orders.id', 'u.first_name', 'u.last_name' ,'link', 'quantity', 's.name', 'status', 'created_at', 'mode'])
+        return $this->getQuery()
+            ->select(['orders.id', 'u.first_name', 'u.last_name', 'link', 'quantity', 's.name', 'status', 'created_at', 'mode'])
+            ->joinWith('user u', false)
+            ->joinWith('service s', false)
             ->orderBy(['id' => SORT_DESC])
-            ->asArray();
+            ->asArray()
+            ->all();
+    }
 
-        return $batch ? $this->getQuery()->batch() : $this->getQuery()->all();
+    /**
+     * Пакетное получение результата поискового запроса
+     * @return BatchQueryResult
+     */
+    public function batchSearch(): BatchQueryResult
+    {
+        return $this->getQuery()
+            ->select(['orders.id', 'u.first_name', 'u.last_name', 'link', 'quantity', 's.name', 'status', 'created_at', 'mode'])
+            ->joinWith('user u', false)
+            ->joinWith('service s', false)
+            ->orderBy(['id' => SORT_DESC])
+            ->asArray()
+            ->batch();
     }
 
     /**
@@ -163,7 +177,13 @@ class OrderSearch extends BaseSearch
      */
     public function getTotalAmount(): int
     {
-        return $this->getQuery()->count();
+        $query = clone $this->getQuery();
+
+        if (isset($this->searchType, $this->searchValue) && SearchTypeThesaurus::tryFrom($this->searchType) === SearchTypeThesaurus::UserName) {
+            $query->joinWith('user u', false);
+        }
+
+        return $query->count();
     }
 
     /**

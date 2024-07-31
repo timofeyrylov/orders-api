@@ -2,7 +2,6 @@
 
 namespace OrderListing\models\search;
 
-use OrderListing\models\query\OrderQuery;
 use OrderListing\models\query\ServiceQuery;
 use OrderListing\models\Service;
 use OrderListing\thesaurus\ModeThesaurus;
@@ -59,7 +58,7 @@ class ServiceSearch extends BaseSearch
      */
     public function applyFilterById(?int $id): self
     {
-        $this->joinWith('orders', 'o')->getQuery()
+        $this->getQuery()
             ->andFilterWhere(['o.id' => $id]);
         return $this;
     }
@@ -72,8 +71,7 @@ class ServiceSearch extends BaseSearch
     public function applyFilterByUserName(?string $userName): self
     {
         if (isset($userName)) {
-            $this->joinWith('orders', 'o', fn(OrderQuery $query) => $query->joinWith('user u'))
-                ->getQuery()
+            $this->getQuery()
                 ->andFilterWhere(['like', 'upper(concat(u.first_name, " ", u.last_name))', mb_strtoupper(trim($userName))]);
         }
         return $this;
@@ -87,7 +85,7 @@ class ServiceSearch extends BaseSearch
     public function applyFilterByLink(?string $link): self
     {
         if (isset($link)) {
-            $this->joinWith('orders', 'o')->getQuery()
+            $this->getQuery()
                 ->andFilterWhere(['like', 'upper(o.link)', mb_strtoupper(trim($link))]);
         }
         return $this;
@@ -100,7 +98,7 @@ class ServiceSearch extends BaseSearch
      */
     public function applyFilterByStatus(?int $status): self
     {
-        $this->joinWith('orders', 'o')->getQuery()
+        $this->getQuery()
             ->andFilterWhere(['o.status' => $status]);
         return $this;
     }
@@ -112,7 +110,7 @@ class ServiceSearch extends BaseSearch
      */
     public function applyFilterByMode(?int $mode): self
     {
-        $this->joinWith('orders', 'o')->getQuery()
+        $this->getQuery()
             ->andFilterWhere(['o.mode' => $mode]);
         return $this;
     }
@@ -124,7 +122,12 @@ class ServiceSearch extends BaseSearch
     public function search(): array
     {
         $this->getQuery()->select(['services.id', 'count(services.id) as amount'])
+            ->joinWith('orders o', false)
             ->groupBy('services.id');
+
+        if (isset($this->searchType, $this->searchValue) && SearchTypeThesaurus::tryFrom($this->searchType) === SearchTypeThesaurus::UserName) {
+            $this->getQuery()->leftJoin('users u', 'u.id = o.user_id');
+        }
 
         return parent::buildQuery()->select(['services.id', 'services.name', 'coalesce(sub.amount, 0) as amount'])
             ->leftJoin(['sub' => $this->getQuery()], 'sub.id = services.id')

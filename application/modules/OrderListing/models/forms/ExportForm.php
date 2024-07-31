@@ -79,7 +79,7 @@ class ExportForm extends Model
         $output = fopen('php://output', 'w');
         $columns = array_map(fn(OrdersColumn $column): string => Yii::t('orders', $column->value), OrdersColumn::cases());
         fputcsv($output, $columns);
-        foreach ($orderSearch->search(batch: true) as $models) {
+        foreach ($orderSearch->batchSearch() as $models) {
             foreach ($models as $model) {
                 fputcsv($output, [
                     $model['id'],
