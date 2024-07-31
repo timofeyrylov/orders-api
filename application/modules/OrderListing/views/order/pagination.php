@@ -1,6 +1,5 @@
 <?php
 
-use app\thesaurus\codes\PaginationThesaurus as ApplicationPagination;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
 
@@ -14,9 +13,9 @@ use yii\widgets\LinkPager;
     </div>
     <div class="col-sm-4 pagination-counters">
         <?= $pagination->getOffset() + 1 ?>
-        <?= Yii::t('application', ApplicationPagination::To->value) ?>
+        <?= Yii::t('application', 'app.pagination.to') ?>
         <?= $pagination->getOffset() + $pagination->getLimit() ?>
-        <?= Yii::t('application', ApplicationPagination::From->value) ?>
+        <?= Yii::t('application', 'app.pagination.from') ?>
         <?= $totalAmount ?>
     </div>
 </div>

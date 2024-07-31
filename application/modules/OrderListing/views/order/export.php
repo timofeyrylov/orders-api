@@ -1,6 +1,5 @@
 <?php
 
-use app\thesaurus\codes\ExportThesaurus as ApplicationExport;
 use yii\helpers\Url;
 
 ?>
@@ -12,5 +11,5 @@ use yii\helpers\Url;
         'searchType' => Yii::$app->request->get('searchType'),
         'searchValue' => Yii::$app->request->get('searchValue'),
         'mode' => Yii::$app->request->get('mode')
-    ]) . '/' ?>"><?= Yii::t('application', ApplicationExport::Save->value) ?></a>
+    ]) . '/' ?>"><?= Yii::t('application', 'application.export.save') ?></a>
 </button>

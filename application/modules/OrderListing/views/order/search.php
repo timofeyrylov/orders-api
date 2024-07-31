@@ -3,13 +3,12 @@
 use OrderListing\thesaurus\SearchTypeThesaurus;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use OrderListing\thesaurus\codes\SearchThesaurus as OrdersSearch;
 
 ?>
 <li class="pull-right custom-search">
     <form class="form-inline" action="<?= Url::current() ?>" method="get">
         <div class="input-group">
-            <input type="text" name="searchValue" class="form-control" value="<?= Html::encode(Yii::$app->request->get('searchValue')) ?>" placeholder="<?= Yii::t('orders', OrdersSearch::Placeholder->value) ?>">
+            <input type="text" name="searchValue" class="form-control" value="<?= Html::encode(Yii::$app->request->get('searchValue')) ?>" placeholder="<?= Yii::t('orders', 'orders.search.placeholder') ?>">
             <span class="input-group-btn search-select-wrap">
 
             <select class="form-control search-select" name="searchType">

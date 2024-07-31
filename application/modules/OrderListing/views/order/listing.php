@@ -1,6 +1,5 @@
 <?php
 
-use app\thesaurus\codes\TabThesaurus as ApplicationTab;
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use OrderListing\widgets\Export;
 use OrderListing\widgets\grid\Body;
@@ -11,7 +10,7 @@ use OrderListing\widgets\NavigationBar;
 use OrderListing\widgets\Pagination;
 use yii\data\Pagination as BasePagination;
 
-$this->title = Yii::t('application', ApplicationTab::Orders->value);
+$this->title = Yii::t('application', 'app.tab.orders');
 ?>
 <?php
 /** @var BasePagination $pagination */

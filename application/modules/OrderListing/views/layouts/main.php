@@ -5,7 +5,6 @@
 
 use app\assets\AppAsset;
 use app\components\NavigationBar;
-use app\thesaurus\codes\TabThesaurus as ApplicationTab;
 
 AppAsset::register($this);
 
@@ -39,7 +38,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <?= NavigationBar::widget([
     'tabs' => [
-        Yii::t('application', ApplicationTab::Orders->value) => '/'
+        Yii::t('application', 'app.tab.orders') => '/'
     ]
 ]) ?>
 <?= $content ?>

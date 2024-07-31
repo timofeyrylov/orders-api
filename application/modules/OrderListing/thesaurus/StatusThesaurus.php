@@ -2,8 +2,6 @@
 
 namespace OrderListing\thesaurus;
 
-use OrderListing\thesaurus\codes\TabThesaurus as OrdersTab;
-
 enum StatusThesaurus: string
 {
     case All = '';
@@ -58,12 +56,12 @@ enum StatusThesaurus: string
     public function getLabel(): string
     {
         return match ($this) {
-            self::All => OrdersTab::AllOrders->value,
-            self::Pending => OrdersTab::Pending->value,
-            self::InProgress => OrdersTab::InProgress->value,
-            self::Completed => OrdersTab::Completed->value,
-            self::Canceled => OrdersTab::Cancelled->value,
-            self::Error => OrdersTab::Error->value
+            self::All => 'orders.tab.all',
+            self::Pending => 'orders.tab.pending',
+            self::InProgress => 'orders.tab.in_progress',
+            self::Completed => 'orders.tab.completed',
+            self::Canceled => 'orders.tab.cancelled',
+            self::Error => 'orders.tab.error'
         };
     }
 }

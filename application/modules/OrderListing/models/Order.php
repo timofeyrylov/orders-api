@@ -3,6 +3,7 @@
 namespace OrderListing\models;
 
 use OrderListing\models\query\OrderQuery;
+use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -58,19 +59,19 @@ class Order extends ActiveRecord
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     public function attributeLabels(): array
     {
         return [
-            'id' => Yii::t('orders', 'ID'),
-            'user_id' => Yii::t('orders', 'User ID'),
-            'link' => Yii::t('orders', 'Link'),
-            'quantity' => Yii::t('orders', 'Quantity'),
-            'service_id' => Yii::t('orders', 'Service ID'),
-            'status' => Yii::t('orders', '0 - Pending, 1 - In progress, 2 - Completed, 3 - Canceled, 4 - Fail'),
-            'created_at' => Yii::t('orders', 'Created At'),
-            'mode' => Yii::t('orders', '0 - Manual, 1 - Auto'),
+            'id' => Yii::t('orders', OrdersColumn::ID->value),
+            'user_id' => Yii::t('orders', OrdersColumn::User->value),
+            'link' => Yii::t('orders', OrdersColumn::Link->value),
+            'quantity' => Yii::t('orders', OrdersColumn::Quantity->value),
+            'service_id' => Yii::t('orders', OrdersColumn::Service->value),
+            'status' => Yii::t('orders', OrdersColumn::Status->value),
+            'created_at' => Yii::t('orders', OrdersColumn::Created->value),
+            'mode' => Yii::t('orders', OrdersColumn::Mode->value),
         ];
     }
 

@@ -1,16 +1,14 @@
 <?php
 
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
-use OrderListing\thesaurus\codes\SearchThesaurus as OrdersSearch;
-use OrderListing\thesaurus\codes\TabThesaurus as OrdersTab;
 
 return [
-    OrdersTab::AllOrders->value => 'All orders',
-    OrdersTab::Pending->value => 'Pending',
-    OrdersTab::InProgress->value => 'In progress',
-    OrdersTab::Completed->value => 'Completed',
-    OrdersTab::Cancelled->value => 'Cancelled',
-    OrdersTab::Error->value => 'Error',
+    'orders.tab.all' => 'All orders',
+    'orders.tab.pending' => 'Pending',
+    'orders.tab.in_progress' => 'In progress',
+    'orders.tab.completed' => 'Completed',
+    'orders.tab.cancelled' => 'Cancelled',
+    'orders.tab.error' => 'Error',
     OrdersColumn::ID->value => 'ID',
     OrdersColumn::User->value => 'User',
     OrdersColumn::Link->value => 'Link',
@@ -19,5 +17,5 @@ return [
     OrdersColumn::Status->value => 'Status',
     OrdersColumn::Mode->value => 'Mode',
     OrdersColumn::Created->value => 'Created',
-    OrdersSearch::Placeholder->value => 'Search orders'
+    'orders.search.placeholder' => 'Search orders'
 ];

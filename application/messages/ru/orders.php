@@ -1,16 +1,14 @@
 <?php
 
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
-use OrderListing\thesaurus\codes\SearchThesaurus as OrdersSearch;
-use OrderListing\thesaurus\codes\TabThesaurus as OrdersTab;
 
 return [
-    OrdersTab::AllOrders->value => 'Все заказы',
-    OrdersTab::Pending->value => 'В ожидании',
-    OrdersTab::InProgress->value => 'В обработке',
-    OrdersTab::Completed->value => 'Завершены',
-    OrdersTab::Cancelled->value => 'Отменены',
-    OrdersTab::Error->value => 'С ошибкой',
+    'orders.tab.all' => 'Все заказы',
+    'orders.tab.pending' => 'В ожидании',
+    'orders.tab.in_progress' => 'В обработке',
+    'orders.tab.completed' => 'Завершены',
+    'orders.tab.cancelled' => 'Отменены',
+    'orders.tab.error' => 'С ошибкой',
     OrdersColumn::ID->value => 'Идентификатор',
     OrdersColumn::User->value => 'Пользователь',
     OrdersColumn::Link->value => 'Ссылка',
@@ -19,5 +17,5 @@ return [
     OrdersColumn::Status->value => 'Статус',
     OrdersColumn::Mode->value => 'Режим',
     OrdersColumn::Created->value => 'Дата создания',
-    OrdersSearch::Placeholder->value => 'Искать заказы'
+    'orders.search.placeholder' => 'Искать заказы'
 ];
