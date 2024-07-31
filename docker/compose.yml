@@ -26,6 +26,7 @@ services:
       - MYSQL_PASSWORD
       - MYSQL_DATABASE
       - YII_ENV
+      - YII_DEBUG
   mysql-service:
     image: mysql:latest
     container_name: mysql-container
