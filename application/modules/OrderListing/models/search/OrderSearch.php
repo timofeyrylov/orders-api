@@ -136,21 +136,17 @@ class OrderSearch extends BaseSearch
 
     /**
      * Получение результата поискового запроса
-     * @param Pagination|null $pagination - Пагинация
      * @return array<>
      */
-    public function search(?Pagination $pagination = null): array
+    public function search(): array
     {
-        if ($pagination) {
-            $this->getQuery()->offset($pagination->getOffset())
-                ->limit($pagination->getLimit());
-        }
-
         return $this->getQuery()
             ->select(['orders.id', 'u.first_name', 'u.last_name', 'link', 'quantity', 's.name', 'status', 'created_at', 'mode'])
             ->joinWith('user u', false)
             ->joinWith('service s', false)
             ->orderBy(['id' => SORT_DESC])
+            ->offset($this->getPaginator()->getOffset())
+            ->limit($this->getPaginator()->getLimit())
             ->asArray()
             ->all();
     }
@@ -214,5 +210,16 @@ class OrderSearch extends BaseSearch
     protected function createQuery(): ActiveQuery
     {
         return Order::find();
+    }
+
+    /**
+     * Создание пагинатора
+     * @return Pagination
+     */
+    protected function createPaginator(): Pagination
+    {
+        $paginator = parent::createPaginator();
+        $paginator->totalCount = $this->getTotalAmount();
+        return $paginator;
     }
 }
