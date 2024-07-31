@@ -2,13 +2,12 @@
 
 namespace OrderListing\widgets\grid;
 
-use OrderListing\models\Order;
 use yii\base\Widget;
 
 class Body extends Widget
 {
     /**
-     * @var array<Order>
+     * @var array<array>
      */
     public array $orders;
 

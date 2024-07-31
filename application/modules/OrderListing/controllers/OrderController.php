@@ -2,8 +2,8 @@
 
 namespace OrderListing\controllers;
 
-use OrderListing\actions\ExportAction;
-use OrderListing\actions\ListingAction;
+use OrderListing\controllers\actions\ExportAction;
+use OrderListing\controllers\actions\ListingAction;
 use yii\web\Controller;
 
 class OrderController extends Controller

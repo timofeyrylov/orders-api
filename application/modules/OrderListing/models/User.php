@@ -2,6 +2,7 @@
 
 namespace OrderListing\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -29,6 +30,18 @@ class User extends ActiveRecord
         return [
             [['first_name', 'last_name'], 'required'],
             [['first_name', 'last_name'], 'string', 'max' => 300],
+        ];
+    }
+
+    /**
+     * @return array<>
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'id' => Yii::t('orders', 'ID'),
+            'first_name' => Yii::t('orders', 'First Name'),
+            'last_name' => Yii::t('orders', 'Last Name'),
         ];
     }
 }

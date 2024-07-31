@@ -1,8 +1,6 @@
 <?php
 
 use app\thesaurus\codes\TabThesaurus as ApplicationTab;
-use OrderListing\models\Order;
-use OrderListing\models\Service;
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use OrderListing\widgets\Export;
 use OrderListing\widgets\grid\Body;
@@ -17,9 +15,8 @@ $this->title = Yii::t('application', ApplicationTab::Orders->value);
 ?>
 <?php
 /** @var BasePagination $pagination */
-/** @var array<Order> $orders */
-/** @var array<Service> $services */
-/** @var int $servicesTotalCount */
+/** @var array<array> $orders */
+/** @var array<array> $services */
 ?>
 <div class="container-fluid">
     <?= NavigationBar::widget() ?>
@@ -31,7 +28,7 @@ $this->title = Yii::t('application', ApplicationTab::Orders->value);
                     [Yii::t('orders', OrdersColumn::User->value)],
                     [Yii::t('orders', OrdersColumn::Link->value)],
                     [Yii::t('orders', OrdersColumn::Quantity->value)],
-                    [ServiceDropdown::widget(['services' => $services, 'totalCount' => $servicesTotalCount]), 'dropdown-th'],
+                    [ServiceDropdown::widget(['services' => $services]), 'dropdown-th'],
                     [Yii::t('orders', OrdersColumn::Status->value)],
                     [ModeDropdown::widget(), 'dropdown-th'],
                     [Yii::t('orders', OrdersColumn::Created->value)]

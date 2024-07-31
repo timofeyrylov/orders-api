@@ -2,10 +2,8 @@
 
 namespace OrderListing\models;
 
-use OrderListing\thesaurus\ModeThesaurus;
-use OrderListing\thesaurus\StatusThesaurus;
+use OrderListing\models\query\OrderQuery;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -23,51 +21,6 @@ use yii\db\ActiveRecord;
  */
 class Order extends ActiveRecord
 {
-    /**
-     * Имя пользователя
-     * @var string
-     */
-    public string $userName;
-
-    /**
-     * Название сервиса
-     * @var string
-     */
-    public string $serviceName;
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getUser(): ActiveQuery
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
-
-    /**
-     * @return ActiveQuery
-     */
-    public function getService(): ActiveQuery
-    {
-        return $this->hasOne(Service::class, ['id' => 'service_id']);
-    }
-
-    /**
-     * @return array
-     */
-    public function fields(): array
-    {
-        return [
-            'id',
-            'userName',
-            'link',
-            'quantity',
-            'serviceName',
-            'status' => fn(): string => Yii::t('orders', StatusThesaurus::getStatusName($this->status)),
-            'mode' => fn(): string => ModeThesaurus::getModeName($this->mode),
-            'created_at' => fn(): string => date('Y-m-d H:i:s', $this->created_at)
-        ];
-    }
-
     /**
      * @return string
      */
@@ -90,13 +43,42 @@ class Order extends ActiveRecord
 
     /**
      * @return OrderQuery
-     * @throws InvalidConfigException
+     */
+    public function getUser(): ActiveQuery
+    {
+        return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    /**
+     * @return OrderQuery
+     */
+    public function getService(): ActiveQuery
+    {
+        return $this->hasOne(Service::class, ['id' => 'service_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'id' => Yii::t('orders', 'ID'),
+            'user_id' => Yii::t('orders', 'User ID'),
+            'link' => Yii::t('orders', 'Link'),
+            'quantity' => Yii::t('orders', 'Quantity'),
+            'service_id' => Yii::t('orders', 'Service ID'),
+            'status' => Yii::t('orders', '0 - Pending, 1 - In progress, 2 - Completed, 3 - Canceled, 4 - Fail'),
+            'created_at' => Yii::t('orders', 'Created At'),
+            'mode' => Yii::t('orders', '0 - Manual, 1 - Auto'),
+        ];
+    }
+
+    /**
+     * @return OrderQuery the active query used by this AR class.
      */
     public static function find(): OrderQuery
     {
-        return Yii::createObject(OrderQuery::class, [get_called_class()])
-            ->select(['orders.id', 'concat(u.first_name, " ", u.last_name) as userName', 'link', 'quantity', 's.name as serviceName', 'status', 'created_at', 'mode'])
-            ->joinWith('user u', false)
-            ->joinWith('service s', false);
+        return new OrderQuery(get_called_class());
     }
 }

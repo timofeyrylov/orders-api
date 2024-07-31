@@ -2,10 +2,10 @@
 
 namespace OrderListing\models;
 
+use OrderListing\models\query\ServiceQuery;
 use Yii;
-use yii\base\InvalidConfigException;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\db\Query;
 
 /**
  * This is the model class for table "services".
@@ -16,20 +16,6 @@ use yii\db\Query;
 class Service extends ActiveRecord
 {
     /**
-     * Колиство заказов по данному сервису
-     * @var int|null
-     */
-    public ?int $amount = null;
-
-    /**
-     * @return Query
-     */
-    public function getOrders(): Query
-    {
-        return $this->hasMany(Order::class, ['service_id' => 'id']);
-    }
-
-    /**
      * @return string
      */
     public static function tableName(): string
@@ -38,7 +24,7 @@ class Service extends ActiveRecord
     }
 
     /**
-     * @return array
+     * @return array<>
      */
     public function rules(): array
     {
@@ -50,10 +36,28 @@ class Service extends ActiveRecord
 
     /**
      * @return ServiceQuery
-     * @throws InvalidConfigException
+     */
+    public function getOrders(): ActiveQuery
+    {
+        return $this->hasMany(Order::class, ['service_id' => 'id']);
+    }
+
+    /**
+     * @return array<>
+     */
+    public function attributeLabels(): array
+    {
+        return [
+            'id' => Yii::t('orders', 'ID'),
+            'name' => Yii::t('orders', 'Name'),
+        ];
+    }
+
+    /**
+     * @return ServiceQuery the active query used by this AR class.
      */
     public static function find(): ServiceQuery
     {
-        return Yii::createObject(ServiceQuery::class, [get_called_class()]);
+        return new ServiceQuery(get_called_class());
     }
 }

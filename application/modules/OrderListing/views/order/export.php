@@ -12,5 +12,5 @@ use yii\helpers\Url;
         'searchType' => Yii::$app->request->get('searchType'),
         'searchValue' => Yii::$app->request->get('searchValue'),
         'mode' => Yii::$app->request->get('mode')
-    ]) ?>"><?= Yii::t('application', ApplicationExport::Save->value) ?></a>
+    ]) . '/' ?>"><?= Yii::t('application', ApplicationExport::Save->value) ?></a>
 </button>

@@ -1,11 +1,9 @@
 <?php
 
-use OrderListing\models\Service;
 use OrderListing\thesaurus\codes\ColumnThesaurus as OrdersColumn;
 use yii\helpers\Url;
 
-/** @var array<Service> $services */
-/** @var int $totalCount */
+/** @var array<array> $services */
 
 ?>
 
@@ -16,18 +14,18 @@ use yii\helpers\Url;
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <li>
             <a href="<?= Url::current(['serviceId' => null]) ?>">
-                All (<?= $totalCount ?>)
+                All (<?= array_sum(array_column($services, 'amount')) ?>)
             </a>
         </li>
         <?php foreach ($services as $model): ?>
             <li
-                <?php if (Yii::$app->request->get('serviceId') === $model->id): ?>
+                <?php if (Yii::$app->request->get('serviceId') === $model['id']): ?>
                     class="active"
-                <?php elseif (!$model->amount): ?>
+                <?php elseif (!$model['amount']): ?>
                     class="disabled" aria-disabled="true"
                 <?php endif; ?>>
-                <a href="<?= Url::current(['serviceId' => $model->id]) ?>">
-                    <span class="label-id"><?= $model->amount ?></span> <?= $model->name ?>
+                <a href="<?= Url::current(['serviceId' => $model['id']]) ?>">
+                    <span class="label-id"><?= $model['amount'] ?></span> <?= $model['name'] ?>
                 </a>
             </li>
         <?php endforeach; ?>
